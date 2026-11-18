@@ -7,8 +7,10 @@ const DEFAULTS = {
   primaryColor: "#b43937",
   backgroundColor: "#fffaf4",
   fontColor: "#22292f",
-  fontFamily: "Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, Helvetica, sans-serif",
 };
+
+// ponytail: fixed font stack, read fontFamily/fontUrl from the branding if an org ever uploads a font
+const FONT = "Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, Helvetica, sans-serif";
 
 export function escapeHtml(s: string): string {
   return s
@@ -31,20 +33,6 @@ function safeUrl(u: string | undefined): string | undefined {
 
 function safeColor(c: string | undefined, fallback: string): string {
   return c && /^#[0-9a-f]{3,8}$/i.test(c) ? c : fallback;
-}
-
-function safeFont(f: string | undefined, fallback: string): string {
-  return f && /^[\w\s,'"-]+$/.test(f) ? f.replaceAll('"', "'") : fallback;
-}
-
-/** White or near-black, whichever reads better on the given background. */
-export function contrastText(hex: string): string {
-  let h = hex.slice(1);
-  if (h.length === 3 || h.length === 4) h = [...h.slice(0, 3)].map((c) => c + c).join("");
-  const [r, g, b] = [0, 2, 4].map((i) => parseInt(h.slice(i, i + 2), 16) / 255);
-  const lin = (c: number) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
-  const luminance = 0.2126 * lin(r) + 0.7152 * lin(g) + 0.0722 * lin(b);
-  return luminance > 0.4 ? "#1a1a1a" : "#ffffff";
 }
 
 function paragraphs(text: string, style: string): string {
@@ -72,9 +60,6 @@ export function render(n: Notification): RenderedMail {
   const primary = safeColor(d.primaryColor, DEFAULTS.primaryColor);
   const background = safeColor(d.backgroundColor, DEFAULTS.backgroundColor);
   const fontColor = safeColor(d.fontColor, DEFAULTS.fontColor);
-  const fontFamily = safeFont(d.fontFamily, DEFAULTS.fontFamily);
-  const fontFace = safeFont(d.fontFaceFamily, "");
-  const fontUrl = safeUrl(d.fontUrl);
   const logo = safeUrl(d.logoUrl);
   const url = safeUrl(d.url);
   const button = url && d.buttonText ? d.buttonText : undefined;
@@ -89,9 +74,8 @@ export function render(n: Notification): RenderedMail {
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light">
 <title>${escapeHtml(d.title ?? d.subject ?? "")}</title>
-${fontUrl && fontFace ? `<style>@font-face{font-family:'${fontFace}';font-style:normal;font-display:swap;src:url(${fontUrl});}</style>` : ""}
 </head>
-<body style="margin:0;padding:0;background:#f3efe9;font-family:${fontFamily};">
+<body style="margin:0;padding:0;background:#f3efe9;font-family:${FONT};">
 ${d.preHeader ? `<div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escapeHtml(d.preHeader)}</div>` : ""}
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f3efe9;">
 <tr><td align="center" style="padding:32px 16px;">
@@ -106,7 +90,7 @@ ${
   button
     ? `<tr><td align="center" style="padding:8px 32px 8px;">
 <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td bgcolor="${primary}" style="border-radius:8px;background:${primary};">
-<a href="${escapeHtml(url!)}" target="_blank" rel="noopener" style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:600;line-height:1.2;color:${contrastText(primary)};text-decoration:none;border-radius:8px;">${escapeHtml(button)}</a>
+<a href="${escapeHtml(url!)}" target="_blank" rel="noopener" style="display:inline-block;padding:14px 28px;font-size:16px;font-weight:600;line-height:1.2;color:#ffffff;text-decoration:none;border-radius:8px;">${escapeHtml(button)}</a>
 </td></tr></table>
 </td></tr>
 <tr><td align="center" style="padding:8px 32px 0;"><a href="${escapeHtml(url!)}" style="font-size:12px;line-height:1.5;color:${fontColor};opacity:0.7;word-break:break-all;">${escapeHtml(url!)}</a></td></tr>`

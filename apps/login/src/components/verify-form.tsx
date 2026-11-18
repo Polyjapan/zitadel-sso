@@ -141,12 +141,9 @@ export function VerifyForm({ userId, loginName, organization, requestId, code, i
       }
     };
     const interval = setInterval(check, 3000);
-    const onVisible = () => document.visibilityState === "visible" && check();
-    document.addEventListener("visibilitychange", onVisible);
     return () => {
       stopped = true;
       clearInterval(interval);
-      document.removeEventListener("visibilitychange", onVisible);
     };
   }, [isInvite, userId, loginName, organization, requestId, router]);
 

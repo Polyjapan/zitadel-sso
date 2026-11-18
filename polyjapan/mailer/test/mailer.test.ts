@@ -3,7 +3,7 @@ import { createServer } from "node:http";
 import type { AddressInfo } from "node:net";
 import { describe, test } from "node:test";
 import { parseNotification, PayloadError } from "../src/payload.ts";
-import { contrastText, render } from "../src/render.ts";
+import { render } from "../src/render.ts";
 import { createHandler } from "../src/server.ts";
 import { sign, verifySignature } from "../src/signature.ts";
 import { verifyEmailPayload } from "./fixtures.ts";
@@ -70,7 +70,7 @@ describe("render", () => {
     assert.doesNotMatch(m.html, /<script>/);
     assert.match(m.html, /&lt;script&gt;/);
   });
-  test("drops non-http links, odd colours and unsafe fonts", () => {
+  test("drops non-http links and odd colours", () => {
     const m = render(
       parseNotification(
         JSON.stringify(
@@ -78,7 +78,6 @@ describe("render", () => {
             url: "javascript:alert(1)",
             logoUrl: "data:image/png;base64,xx",
             primaryColor: "red;background:url(x)",
-            fontFamily: "x;}</style><script>",
           }),
         ),
       ),
@@ -97,11 +96,6 @@ describe("render", () => {
   test("leaves the footer out when ZITADEL says so", () => {
     const m = render(parseNotification(JSON.stringify(verifyEmailPayload({ includeFooter: false }))));
     assert.doesNotMatch(m.html, /Japan Impact · EPFL/);
-  });
-  test("picks readable button text", () => {
-    assert.equal(contrastText("#b43937"), "#ffffff");
-    assert.equal(contrastText("#f8d295"), "#1a1a1a");
-    assert.equal(contrastText("#fff"), "#1a1a1a");
   });
 });
 

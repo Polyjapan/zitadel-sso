@@ -60,6 +60,3 @@ ZITADEL_URL=https://sso.polyjapan.ch ZITADEL_PAT_FILE=pat.txt npm run sync-texts
 Texts are set instance-wide, so they stay neutral between PolyJapan and Japan Impact. Writing needs
 a token allowed to change instance message texts. `{{.FirstName}}`, `{{.PreferredLoginName}}` and
 the other ZITADEL variables are filled by ZITADEL.
-
-`npm run preview -- <dir> [jpi|pj]` renders every text with the production branding into
-`<dir>/<lang>-<type>.html`.

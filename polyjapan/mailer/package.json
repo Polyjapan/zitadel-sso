@@ -9,7 +9,6 @@
   "scripts": {
     "start": "node src/server.ts",
     "test": "node --test 'test/**/*.test.ts'",
-    "preview": "node scripts/preview.ts",
     "sync-texts": "node scripts/sync-texts.ts"
   },
   "dependencies": {
