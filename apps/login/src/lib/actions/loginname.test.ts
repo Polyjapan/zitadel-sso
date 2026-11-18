@@ -701,6 +701,55 @@ describe("sendLoginname", () => {
       expect(result?.redirect).toContain("email=user%40example.com");
     });
 
+    test("should redirect an unknown e-mail to register in the default organization", async () => {
+      mockGetLoginSettings.mockResolvedValue({
+        allowRegister: true,
+        allowLocalAuthentication: true,
+        ignoreUnknownUsernames: false,
+      });
+
+      const result = await sendLoginname({
+        loginName: "new@example.com",
+        defaultOrganization: "defaultOrg",
+        requestId: "req123",
+      });
+
+      expect(result?.redirect).toMatch(/^\/register\?/);
+      expect(result?.redirect).toContain("organization=defaultOrg");
+      expect(result?.redirect).toContain("requestId=req123");
+      expect(result?.redirect).toContain("email=new%40example.com");
+    });
+
+    test("should not redirect an unknown username that is not an e-mail to register", async () => {
+      mockGetLoginSettings.mockResolvedValue({
+        allowRegister: true,
+        allowLocalAuthentication: true,
+        ignoreUnknownUsernames: false,
+      });
+
+      const result = await sendLoginname({
+        loginName: "typo-username",
+        defaultOrganization: "defaultOrg",
+      });
+
+      expect(result).toEqual({ error: "errors.userNotFound" });
+    });
+
+    test("should not redirect an unknown e-mail to register when ignoreUnknownUsernames is true", async () => {
+      mockGetLoginSettings.mockResolvedValue({
+        allowRegister: true,
+        allowLocalAuthentication: true,
+        ignoreUnknownUsernames: true,
+      });
+
+      const result = await sendLoginname({
+        loginName: "new@example.com",
+        defaultOrganization: "defaultOrg",
+      });
+
+      expect(result?.redirect ?? "").not.toMatch(/^\/register\?/);
+    });
+
     test("should redirect to password when ignoreUnknownUsernames is true", async () => {
       mockGetLoginSettings.mockResolvedValue({
         ignoreUnknownUsernames: true,

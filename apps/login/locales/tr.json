@@ -26,6 +26,7 @@
     "title": "Tekrar hoş geldiniz!",
     "description": "Giriş bilgilerinizi girin.",
     "register": "Yeni kullanıcı kaydet",
+    "noAccount": "Don't have an account yet?",
     "submit": "Devam",
     "labels": {
       "loginname": "Kullanıcı adı",

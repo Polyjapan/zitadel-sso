@@ -26,6 +26,7 @@
     "title": "Bentornato!",
     "description": "Inserisci i tuoi dati di accesso.",
     "register": "Registrati come nuovo utente",
+    "noAccount": "Non hai ancora un account?",
     "submit": "Continua",
     "labels": {
       "loginname": "Nome di accesso",

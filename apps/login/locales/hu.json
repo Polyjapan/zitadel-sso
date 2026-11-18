@@ -26,6 +26,7 @@
     "title": "Üdvözlünk újra!",
     "description": "Add meg a bejelentkezési adataidat.",
     "register": "Új felhasználó regisztrálása",
+    "noAccount": "Don't have an account yet?",
     "submit": "Tovább",
     "labels": {
       "loginname": "Bejelentkezési név",

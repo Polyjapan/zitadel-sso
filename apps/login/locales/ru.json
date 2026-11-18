@@ -26,6 +26,7 @@
     "title": "С возвращением!",
     "description": "Введите свои данные для входа.",
     "register": "Зарегистрировать нового пользователя",
+    "noAccount": "Don't have an account yet?",
     "submit": "Продолжить",
     "labels": {
       "loginname": "Логин",

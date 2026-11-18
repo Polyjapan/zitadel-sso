@@ -26,6 +26,7 @@
     "title": "З поверненням!",
     "description": "Введіть свої дані для входу.",
     "register": "Зареєструвати нового користувача",
+    "noAccount": "Don't have an account yet?",
     "submit": "Продовжити",
     "labels": {
       "loginname": "Ім'я для входу",

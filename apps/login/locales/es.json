@@ -26,6 +26,7 @@
     "title": "¡Bienvenido de nuevo!",
     "description": "Introduce tus datos de acceso.",
     "register": "Registrar nuevo usuario",
+    "noAccount": "Don't have an account yet?",
     "submit": "Continuar",
     "labels": {
       "loginname": "Nombre de inicio de sesión",

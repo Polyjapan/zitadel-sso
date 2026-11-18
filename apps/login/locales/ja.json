@@ -26,6 +26,7 @@
     "title": "お帰りなさい！",
     "description": "ログイン情報を入力してください。",
     "register": "新規ユーザー登録",
+    "noAccount": "Don't have an account yet?",
     "submit": "続行",
     "labels": {
       "loginname": "ログイン名",

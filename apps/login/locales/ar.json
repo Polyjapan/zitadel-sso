@@ -26,6 +26,7 @@
     "title": "مرحباً بعودتك!",
     "description": "أدخل بيانات الدخول الخاصة بك.",
     "register": "تسجيل مستخدم جديد",
+    "noAccount": "Don't have an account yet?",
     "submit": "متابعة",
     "labels": {
       "loginname": "اسم الدخول",

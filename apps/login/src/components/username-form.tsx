@@ -114,27 +114,6 @@ export function UsernameForm({
             data-testid="username-text-input"
             suffix={hideSuffix ? undefined : suffix}
           />
-          {allowRegister && (
-            <button
-              className="hover:text-primary-light-500 dark:hover:text-primary-dark-500 text-sm transition-all"
-              onClick={() => {
-                const registerParams = new URLSearchParams();
-                if (organization) {
-                  registerParams.append("organization", organization);
-                }
-                if (requestId) {
-                  registerParams.append("requestId", requestId);
-                }
-
-                router.push("/register?" + registerParams);
-              }}
-              type="button"
-              disabled={loading}
-              data-testid="register-button"
-            >
-              <Translated i18nKey="register" namespace="loginname" />
-            </button>
-          )}
         </div>
 
         {error && (
@@ -157,6 +136,32 @@ export function UsernameForm({
             <Translated i18nKey="submit" namespace="loginname" />
           </Button>
         </div>
+        {allowRegister && (
+          <div className="mt-6 flex w-full flex-col items-center space-y-3">
+            <p className="text-sm text-text-light-secondary-500 dark:text-text-dark-secondary-500">
+              <Translated i18nKey="noAccount" namespace="loginname" />
+            </p>
+            <Button
+              type="button"
+              variant={ButtonVariants.Secondary}
+              className="w-full justify-center"
+              disabled={loading}
+              data-testid="register-button"
+              onClick={() => {
+                const registerParams = new URLSearchParams();
+                if (organization) {
+                  registerParams.append("organization", organization);
+                }
+                if (requestId) {
+                  registerParams.append("requestId", requestId);
+                }
+                router.push("/register?" + registerParams);
+              }}
+            >
+              <Translated i18nKey="register" namespace="loginname" />
+            </Button>
+          </div>
+        )}
       </form>
     </>
   );

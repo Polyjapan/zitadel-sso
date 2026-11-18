@@ -41,6 +41,7 @@ export type SendLoginnameCommand = {
 };
 
 const ORG_SUFFIX_REGEX = /(?<=@)(.+)/;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export async function sendLoginname(command: SendLoginnameCommand) {
   const _headers = await headers();
@@ -639,9 +640,13 @@ export async function sendLoginname(command: SendLoginnameCommand) {
   if (effectiveLoginSettings?.allowRegister && effectiveLoginSettings?.allowLocalAuthentication) {
     logger.debug("register and password both allowed");
     // do not register user if ignoreUnknownUsernames is set
-    if (discoveredOrganization && !effectiveLoginSettings?.ignoreUnknownUsernames) {
-      logger.debug("Redirecting to registration page", { organization: discoveredOrganization });
-      const params = new URLSearchParams({ organization: discoveredOrganization });
+    // PolyJapan: an unknown e-mail also goes to registration in the default organization,
+    // so people who type their address on the public login land on account creation.
+    const registerOrganization =
+      discoveredOrganization ?? (EMAIL_REGEX.test(command.loginName) ? command.defaultOrganization : undefined);
+    if (registerOrganization && !effectiveLoginSettings?.ignoreUnknownUsernames) {
+      logger.debug("Redirecting to registration page", { organization: registerOrganization });
+      const params = new URLSearchParams({ organization: registerOrganization });
 
       if (command.requestId) {
         params.set("requestId", command.requestId);
