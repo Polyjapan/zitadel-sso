@@ -46,6 +46,7 @@ vi.mock("@/lib/server/fingerprint", () => ({
 
 vi.mock("next-intl/server", () => ({
   getTranslations: vi.fn(() => (key: string) => key),
+  getLocale: vi.fn(async () => "fr"),
 }));
 
 describe("registerUserAndLinkToIDP", () => {
