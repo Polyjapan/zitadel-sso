@@ -1,4 +1,6 @@
 import { Alert } from "@/components/alert";
+import { MagicLinkButton } from "@/components/magic-link-button";
+import { isMagicLinkOrganization } from "@/lib/server/magic-link";
 import { DynamicTheme } from "@/components/dynamic-theme";
 import { PasswordForm } from "@/components/password-form";
 import { Translated } from "@/components/translated";
@@ -93,6 +95,10 @@ export default async function Page(props: { searchParams: Promise<Record<string 
             defaultOrganization={defaultOrganization}
             loginSettings={loginSettings}
           />
+        )}
+
+        {loginName && isMagicLinkOrganization(sessionFactors?.factors?.user?.organizationId) && (
+          <MagicLinkButton loginName={loginName} organization={organization} requestId={requestId} />
         )}
       </div>
     </DynamicTheme>

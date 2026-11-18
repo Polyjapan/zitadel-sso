@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "Password verification is too old. Please verify your password again.",
       "passwordResetNotAllowed": "Password reset is not allowed. Contact your administrator for more information.",
       "localAuthenticationNotAllowed": "Local authentication is not allowed! Contact your administrator for more information."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "This field is required"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "Set up 2-Factor",

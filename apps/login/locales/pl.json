@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "Weryfikacja hasła jest przestarzała. Proszę zweryfikować hasło ponownie.",
       "passwordResetNotAllowed": "Resetowanie hasła jest niedozwolone. Skontaktuj się z administratorem, aby uzyskać więcej informacji.",
       "localAuthenticationNotAllowed": "Uwierzytelnianie lokalne nie jest dozwolone! Skontaktuj się z administratorem, aby uzyskać więcej informacji."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "To pole jest wymagane"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "Skonfiguruj uwierzytelnianie dwuskładnikowe",

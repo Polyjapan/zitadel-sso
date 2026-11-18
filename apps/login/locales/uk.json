@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "Перевірка пароля застаріла. Будь ласка, перевірте пароль ще раз.",
       "passwordResetNotAllowed": "Скидання пароля заборонено. Зверніться до адміністратора за додатковою інформацією.",
       "localAuthenticationNotAllowed": "Локальна аутентифікація заборонена! Зверніться до адміністратора за додатковою інформацією."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "Це поле обов'язкове"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "Налаштувати 2-факторну автентифікацію",

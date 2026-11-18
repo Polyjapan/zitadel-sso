@@ -18,6 +18,15 @@ To upgrade, rebase `polyjapan` onto the new upstream tag.
 - **Language stored at registration.** Accounts created in the login get the login's language as
   their preferred language, so their e-mails arrive in it instead of the instance default.
 
+- **Sign-in link by e-mail ("magic link").** In the organisations listed in
+  `MAGIC_LINK_ORGANIZATIONS` (comma separated ids), the password page offers "Get a sign-in link by
+  e-mail". It is ZITADEL's e-mail OTP: the code alone signs in, and the e-mail code is no longer a
+  second factor after a password there. Accounts with a TOTP, SMS or security key keep their usual
+  login. An unverified address gets the verification mail first. A link opened in another browser
+  shows the code to type where the sign-in started. Set the lockout policy's `maxOtpAttempts` to 0
+  for these organisations (a wrong code would otherwise lock the account) and rate-limit the login
+  in front of ZITADEL instead.
+
 Texts shown in the login (titles, button labels) are set at runtime through the API
 (`SetHostedLoginTranslation`), not in this repository.
 

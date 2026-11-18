@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "A jelszó hitelesítés túl régi. Kérjük, erősítsd meg újra a jelszavadat.",
       "passwordResetNotAllowed": "A jelszó-visszaállítás nem engedélyezett. További információért fordulj a rendszergazdához.",
       "localAuthenticationNotAllowed": "A helyi hitelesítés nem engedélyezett! További információért fordulj a rendszergazdához."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "Ez a mező kötelező"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "Kétlépcsős azonosítás beállítása",

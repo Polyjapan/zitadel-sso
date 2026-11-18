@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "التحقق من كلمة المرور قديم جدًا. يرجى التحقق من كلمة المرور مرة أخرى.",
       "passwordResetNotAllowed": "إعادة تعيين كلمة المرور غير مسموح بها. اتصل بالمسؤول لمزيد من المعلومات.",
       "localAuthenticationNotAllowed": "المصادقة المحلية غير مسموح بها! اتصل بالمسؤول لمزيد من المعلومات."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "هذا الحقل مطلوب"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "إعداد المصادقة الثنائية",

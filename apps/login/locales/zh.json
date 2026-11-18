@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "密码验证已过期。请重新通过验证。",
       "passwordResetNotAllowed": "不允许重置密码。请联系您的管理员以获取更多信息。",
       "localAuthenticationNotAllowed": "不允许本地身份验证！请联系您的管理员以获取更多信息。"
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "此字段为必填项"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "设置双因素认证",

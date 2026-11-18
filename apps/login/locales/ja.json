@@ -149,6 +149,11 @@
       "equals": "パスワード確認が一致しました。",
       "matches": "一致します",
       "doesNotMatch": "一致しません"
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -242,7 +247,8 @@
       },
       "required": {
         "code": "必須項目です"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "二要素認証の設定",

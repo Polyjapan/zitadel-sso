@@ -1,4 +1,4 @@
-import { Alert } from "@/components/alert";
+import { Alert, AlertType } from "@/components/alert";
 import { DynamicTheme } from "@/components/dynamic-theme";
 import { LoginOTP } from "@/components/login-otp";
 import { Translated } from "@/components/translated";
@@ -72,7 +72,18 @@ export default async function Page(props: {
           </p>
         )}
 
-        {!session && (
+        {!session && method === "email" && code && /^\w{1,16}$/.test(code) && (
+          // PolyJapan: the mail link opened in a browser that did not ask for it (the mail app's):
+          // show the code to type where the sign-in started
+          <div className="py-4" data-testid="otp-code-elsewhere">
+            <Alert type={AlertType.INFO}>
+              <Translated i18nKey="verify.codeElsewhere" namespace="otp" />
+              <div className="mt-2 font-mono text-2xl tracking-widest">{code}</div>
+            </Alert>
+          </div>
+        )}
+
+        {!session && !(method === "email" && code) && (
           <div className="py-4">
             <Alert>
               {/* context was provided but the session could not be resolved (cookie missing, invalid or expired) */}

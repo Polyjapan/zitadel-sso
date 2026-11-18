@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "Wachtwoordverificatie is te oud. Verifieer je wachtwoord opnieuw.",
       "passwordResetNotAllowed": "Wachtwoord resetten is niet toegestaan. Neem contact op met uw beheerder voor meer informatie.",
       "localAuthenticationNotAllowed": "Lokale authenticatie is niet toegestaan! Neem contact op met uw beheerder voor meer informatie."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "Dit veld is verplicht"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "Stel 2-factor in",

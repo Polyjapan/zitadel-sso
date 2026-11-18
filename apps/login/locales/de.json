@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "Passwort-Verifizierung ist zu alt. Bitte verifizieren Sie Ihr Passwort erneut.",
       "passwordResetNotAllowed": "Das Zurücksetzen des Passworts ist nicht zulässig. Wenden Sie sich für weitere Informationen an Ihren Administrator.",
       "localAuthenticationNotAllowed": "Lokale Authentifizierung nicht zulässig! Wenden Sie sich für weitere Informationen an Ihren Administrator."
+    },
+    "magicLink": {
+      "or": "Oder ohne Passwort:",
+      "button": "Anmeldelink per E-Mail erhalten",
+      "unavailable": "Für dieses Konto ist kein Anmeldelink verfügbar. Verwenden Sie Ihr Passwort oder Ihre übliche Methode."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "Dieses Feld ist erforderlich"
-      }
+      },
+      "codeElsewhere": "Dieser Link wurde in einem anderen Browser geöffnet. Geben Sie diesen Code auf der Seite ein, auf der Sie ihn angefordert haben:"
     },
     "set": {
       "title": "2-Faktor einrichten",

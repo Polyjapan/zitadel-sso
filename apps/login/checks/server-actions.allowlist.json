@@ -19,6 +19,9 @@
   "src/lib/actions/loginname.ts": [
     "sendLoginname"
   ],
+  "src/lib/actions/magic-link.ts": [
+    "sendMagicLink"
+  ],
   "src/lib/actions/oidc.ts": [
     "getDeviceAuthorizationRequest"
   ],

@@ -1,5 +1,6 @@
 import "server-only";
 
+import { isMagicLinkOrganization, secondFactorsOf } from "@/lib/server/magic-link";
 import { getMostRecentCookieWithLoginname, getSessionCookieById } from "@/lib/server/cookies";
 import { shouldEnforceMFA } from "@/lib/server/verify-helper";
 import {
@@ -107,13 +108,18 @@ export function hasVerifiedPrimaryFactor(session: Partial<Session>): {
       ? session?.factors?.webAuthN?.verifiedAt
       : undefined;
   const validIDP = session?.factors?.intent?.verifiedAt;
+  const validMagicLink = magicLinkVerifiedAt(session);
 
   const stillValid = session.expirationDate ? timestampDate(session.expirationDate) > new Date() : true;
 
-  const verifiedAt = validPassword || validPasskey || validIDP;
+  const verifiedAt = validPassword || validPasskey || validIDP || validMagicLink;
   const valid = !!(verifiedAt && stillValid);
 
   return { valid, verifiedAt };
+}
+
+function magicLinkVerifiedAt(session: Partial<Session>) {
+  return isMagicLinkOrganization(session?.factors?.user?.organizationId) ? session?.factors?.otpEmail?.verifiedAt : undefined;
 }
 
 /**
@@ -150,13 +156,7 @@ export async function isSessionValid({
 
   const authMethods = authMethodTypes.authMethodTypes;
   // Filter to only MFA methods (exclude PASSWORD and PASSKEY)
-  const mfaMethods = authMethods?.filter(
-    (method) =>
-      method === AuthenticationMethodType.TOTP ||
-      method === AuthenticationMethodType.OTP_EMAIL ||
-      method === AuthenticationMethodType.OTP_SMS ||
-      method === AuthenticationMethodType.U2F,
-  );
+  const mfaMethods = secondFactorsOf(authMethods, session.factors.user.organizationId);
 
   // A user-verified passkey (possession + user verification) is inherently multi-factor.
   // Mirrors the passkey escape in checkMFAFactors, which never prompts for an additional
@@ -196,7 +196,7 @@ export async function isSessionValid({
     return false;
   }
 
-  const validChecks = !!(validPassword || validPasskey || validIDP);
+  const validChecks = !!(validPassword || validPasskey || validIDP || magicLinkVerifiedAt(session));
 
   if (!validChecks) {
     return false;

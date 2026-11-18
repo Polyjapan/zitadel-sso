@@ -1,5 +1,6 @@
 import "server-only";
 
+import { secondFactorsOf } from "@/lib/server/magic-link";
 import { getUserByID, ServiceConfig } from "@/lib/server/zitadel";
 import { timestampDate } from "@zitadel/client";
 import { Session } from "@zitadel/proto/zitadel/session/v2/session_pb";
@@ -14,13 +15,7 @@ export async function checkMFAFactors(
   organization?: string,
   requestId?: string,
 ) {
-  const availableMultiFactors = authMethods?.filter(
-    (m: AuthenticationMethodType) =>
-      m === AuthenticationMethodType.TOTP ||
-      m === AuthenticationMethodType.OTP_SMS ||
-      m === AuthenticationMethodType.OTP_EMAIL ||
-      m === AuthenticationMethodType.U2F,
-  );
+  const availableMultiFactors = secondFactorsOf(authMethods, session.factors?.user?.organizationId);
 
   const hasAuthenticatedWithPasskey = session.factors?.webAuthN?.verifiedAt && session.factors?.webAuthN?.userVerified;
 

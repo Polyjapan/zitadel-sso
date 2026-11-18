@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "La vérification du mot de passe est trop ancienne. Veuillez vérifier à nouveau votre mot de passe.",
       "passwordResetNotAllowed": "La réinitialisation du mot de passe n'est pas autorisée. Contactez votre administrateur pour plus d'informations.",
       "localAuthenticationNotAllowed": "L'authentification locale n'est pas autorisée ! Contactez votre administrateur pour plus d'informations."
+    },
+    "magicLink": {
+      "or": "Ou, sans mot de passe :",
+      "button": "Recevoir un lien de connexion par e-mail",
+      "unavailable": "Le lien de connexion n'est pas disponible pour ce compte. Utilisez votre mot de passe ou votre méthode habituelle."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "Ce champ est requis"
-      }
+      },
+      "codeElsewhere": "Ce lien s'est ouvert dans un autre navigateur. Saisissez ce code sur la page où vous l'avez demandé :"
     },
     "set": {
       "title": "Configurer l'authentification à deux facteurs",

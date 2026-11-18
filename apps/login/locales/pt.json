@@ -156,6 +156,11 @@
       "passwordVerificationTooOld": "A verificação de senha expirou. Por favor, verifique sua senha novamente.",
       "passwordResetNotAllowed": "A redefinição de senha não é permitida. Entre em contato com o administrador para mais informações.",
       "localAuthenticationNotAllowed": "A autenticação local não é permitida! Entre em contato com o administrador para mais informações."
+    },
+    "magicLink": {
+      "or": "Or, without a password:",
+      "button": "Get a sign-in link by e-mail",
+      "unavailable": "A sign-in link is not available for this account. Use your password or your usual method."
     }
   },
   "idp": {
@@ -249,7 +254,8 @@
       },
       "required": {
         "code": "Este campo é obrigatório"
-      }
+      },
+      "codeElsewhere": "This link was opened in another browser. Type this code on the page where you asked for it:"
     },
     "set": {
       "title": "Configurar 2º Fator",
