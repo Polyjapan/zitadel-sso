@@ -461,9 +461,19 @@ export type AddHumanUserData = WithServiceConfig<{
   email: string;
   password?: string;
   organization: string;
+  /** Language of the login at registration, so notifications reach the user in it. */
+  preferredLanguage?: string;
 }>;
 
-export async function addHumanUser({ serviceConfig, email, firstName, lastName, password, organization }: AddHumanUserData) {
+export async function addHumanUser({
+  serviceConfig,
+  email,
+  firstName,
+  lastName,
+  password,
+  organization,
+  preferredLanguage,
+}: AddHumanUserData) {
   const userService: Client<typeof UserService> = await createServiceForHost(UserService, serviceConfig);
 
   let addHumanUserRequest: AddHumanUserRequest = create(AddHumanUserRequestSchema, {
@@ -475,7 +485,7 @@ export async function addHumanUser({ serviceConfig, email, firstName, lastName, 
       },
     },
     username: email,
-    profile: { givenName: firstName, familyName: lastName },
+    profile: { givenName: firstName, familyName: lastName, preferredLanguage },
     passwordType: password ? { case: "password", value: { password } } : undefined,
   });
 

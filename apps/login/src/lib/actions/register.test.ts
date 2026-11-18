@@ -1,4 +1,4 @@
-import { registerUserAndLinkToIDP } from "@/lib/actions/register";
+import { registerUser, registerUserAndLinkToIDP } from "@/lib/actions/register";
 import { beforeEach, describe, expect, test, vi } from "vitest";
 
 vi.mock("@/lib/server/zitadel", () => ({
@@ -34,6 +34,7 @@ vi.mock("@/lib/server/verify-helper", () => ({
 
 vi.mock("next-intl/server", () => ({
   getTranslations: vi.fn(async () => (key: string) => key),
+  getLocale: vi.fn(async () => "fr"),
 }));
 
 // fphg: the registration must come from the browser that started the IdP flow
@@ -104,6 +105,16 @@ describe("registerUserAndLinkToIDP", () => {
     );
   });
 
+  test("stores the login language as the user's preferred language", async () => {
+    zitadel.retrieveIDPIntent.mockResolvedValue({
+      idpInformation: { idpId: "idp-1", userId: "external-user", userName: "name" },
+    });
+
+    await registerUserAndLinkToIDP(command);
+
+    expect(zitadel.addHumanUser).toHaveBeenCalledWith(expect.objectContaining({ preferredLanguage: "fr" }));
+  });
+
   test("creates no user when the intent can't be retrieved", async () => {
     zitadel.retrieveIDPIntent.mockRejectedValue(new Error("invalid intent token"));
 
@@ -112,5 +123,26 @@ describe("registerUserAndLinkToIDP", () => {
     expect(res).toEqual({ error: "errors.couldNotLinkIDP" });
     expect(zitadel.addHumanUser).not.toHaveBeenCalled();
     expect(zitadel.addIDPLink).not.toHaveBeenCalled();
+  });
+});
+
+describe("registerUser", () => {
+  test("stores the login language as the user's preferred language", async () => {
+    vi.clearAllMocks();
+    const zitadel: any = vi.mocked(await import("@/lib/server/zitadel"));
+    zitadel.getLoginSettings.mockResolvedValue({ allowRegister: true, allowLocalAuthentication: true });
+    zitadel.addHumanUser.mockResolvedValue({ userId: "new-user" });
+
+    await registerUser({
+      email: "new@example.com",
+      firstName: "New",
+      lastName: "User",
+      organization: "org-1",
+      password: "Very-Long-Passw0rd!",
+    }).catch(() => undefined);
+
+    expect(zitadel.addHumanUser).toHaveBeenCalledWith(
+      expect.objectContaining({ email: "new@example.com", preferredLanguage: "fr" }),
+    );
   });
 });
