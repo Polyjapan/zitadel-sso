@@ -11,6 +11,7 @@ import {
   verifyInviteCode,
   verifyTOTPRegistration,
   sendEmailCode as zitadelSendEmailCode,
+  type ServiceConfig,
 } from "@/lib/server/zitadel";
 
 import { completeFlowOrGetUrl } from "@/lib/actions/flow";
@@ -25,6 +26,7 @@ import { setUserVerificationCheckCookie } from "@/lib/server/verification-check"
 import { buildVerificationUrlTemplate } from "@/lib/server/verification-email";
 import { create } from "@zitadel/client";
 import { Session } from "@zitadel/proto/zitadel/session/v2/session_pb";
+import { User } from "@zitadel/proto/zitadel/user/v2/user_pb";
 import { ChecksSchema } from "@zitadel/proto/zitadel/session/v2/session_service_pb";
 import { AuthenticationMethodType } from "@zitadel/proto/zitadel/user/v2/user_service_pb";
 import { getTranslations } from "next-intl/server";
@@ -94,14 +96,59 @@ export async function sendVerification(command: VerifyUserByEmailCommand) {
     return { error: t("errors.couldNotVerify") };
   }
 
-  let session: Session | undefined;
   const userResponse = await getUserByID({ serviceConfig, userId: command.userId });
 
   if (!userResponse || !userResponse.user) {
     return { error: t("errors.couldNotLoadUser") };
   }
 
-  const user = userResponse.user;
+  return continueAfterVerification(command, userResponse.user, serviceConfig, t);
+}
+
+type ContinueAfterVerificationCommand = Omit<VerifyUserByEmailCommand, "code" | "isInvite">;
+
+/**
+ * PolyJapan: the e-mail can be confirmed in another browser (the mail app's), where this
+ * browser's login flow cannot be completed. The verify page of the browser that started the flow
+ * calls this repeatedly: once the address is verified, it continues the flow here, as if the code
+ * had been typed. It only acts on the session this browser holds for the user.
+ */
+export async function continueIfVerifiedElsewhere(command: ContinueAfterVerificationCommand) {
+  const t = await getTranslations("verify");
+  const _headers = await headers();
+  const { serviceConfig } = getServiceConfig(_headers);
+  const pending = { pending: true as const };
+
+  const userResponse = await getUserByID({ serviceConfig, userId: command.userId }).catch(() => undefined);
+  const user = userResponse?.user;
+  if (!user || user.type.case !== "human" || !user.type.value.email?.isVerified) {
+    return pending;
+  }
+
+  const sessionCookie = await getSessionCookieByLoginName({
+    loginName: command.loginName ?? user.preferredLoginName,
+    organization: command.organization,
+  }).catch(() => undefined);
+  if (!sessionCookie) {
+    return pending;
+  }
+  const session = await getSession({ serviceConfig, sessionId: sessionCookie.id, sessionToken: sessionCookie.token })
+    .then((response) => response?.session)
+    .catch(() => undefined);
+  if (session?.factors?.user?.id !== user.userId) {
+    return pending;
+  }
+
+  return continueAfterVerification(command, user, serviceConfig, t);
+}
+
+async function continueAfterVerification(
+  command: ContinueAfterVerificationCommand,
+  user: User,
+  serviceConfig: ServiceConfig,
+  t: Awaited<ReturnType<typeof getTranslations>>,
+) {
+  let session: Session | undefined;
 
   const sessionCookie = await getSessionCookieByLoginName({
     loginName: command.loginName ?? user.preferredLoginName,
@@ -144,7 +191,7 @@ export async function sendVerification(command: VerifyUserByEmailCommand) {
         user: {
           search: {
             case: "loginName",
-            value: userResponse.user.preferredLoginName,
+            value: user.preferredLoginName,
           },
         },
       });

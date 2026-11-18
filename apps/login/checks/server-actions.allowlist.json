@@ -51,6 +51,7 @@
     "verifyU2F"
   ],
   "src/lib/actions/verify.ts": [
+    "continueIfVerifiedElsewhere",
     "resendVerification",
     "sendVerification",
     "verifyTOTP"

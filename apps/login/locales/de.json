@@ -403,6 +403,7 @@
     "userIdMissing": "Keine Benutzer-ID angegeben!",
     "successTitle": "Benutzer verifiziert",
     "successDescription": "Der Benutzer wurde erfolgreich verifiziert.",
+    "successElsewhere": "Ihre Adresse ist bestätigt. Wenn Sie auf einer anderen Seite oder einem anderen Gerät begonnen haben, kehren Sie dorthin zurück: Es geht dort automatisch weiter. Sie können diese Seite schließen.",
     "successContinue": "Weiter",
     "setupAuthenticator": "Authentifikator einrichten",
     "verify": {

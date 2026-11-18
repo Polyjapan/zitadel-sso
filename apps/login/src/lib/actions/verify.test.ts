@@ -1,4 +1,4 @@
-import { sendVerification, verifyTOTP } from "@/lib/actions/verify";
+import { continueIfVerifiedElsewhere, sendVerification, verifyTOTP } from "@/lib/actions/verify";
 import { trySendVerification } from "@/lib/server/verification-email";
 import { afterEach, beforeEach, describe, expect, test, vi } from "vitest";
 
@@ -229,6 +229,61 @@ describe("sendVerification", () => {
       loginName: "test@example.com",
       organization: undefined,
     });
+  });
+});
+
+describe("continueIfVerifiedElsewhere", () => {
+  const human = (isVerified: boolean) => ({
+    user: {
+      userId: "user-1",
+      preferredLoginName: "test@example.com",
+      type: { case: "human", value: { email: { email: "test@example.com", isVerified } } },
+    },
+  });
+  const command = { userId: "user-1", loginName: "test@example.com", requestId: "oidc_req" };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    vi.mocked(cookies).mockResolvedValue({ set: vi.fn() } as any);
+    vi.mocked(getSessionCookieByLoginName).mockResolvedValue({ id: "session-1", token: "token-1" } as any);
+    vi.mocked(getSession).mockResolvedValue({
+      session: { id: "session-1", factors: { user: { id: "user-1", loginName: "test@example.com" } } },
+    } as any);
+    vi.mocked(listAuthenticationMethodTypes).mockResolvedValue({ authMethodTypes: [] } as any);
+  });
+
+  test("waits while the address is not verified", async () => {
+    vi.mocked(getUserByID).mockResolvedValue(human(false) as any);
+
+    expect(await continueIfVerifiedElsewhere(command)).toEqual({ pending: true });
+    expect(verifyEmail).not.toHaveBeenCalled();
+  });
+
+  test("waits when this browser has no session", async () => {
+    vi.mocked(getUserByID).mockResolvedValue(human(true) as any);
+    vi.mocked(getSessionCookieByLoginName).mockResolvedValue(undefined as any);
+
+    expect(await continueIfVerifiedElsewhere(command)).toEqual({ pending: true });
+  });
+
+  test("waits when this browser's session belongs to another user", async () => {
+    vi.mocked(getUserByID).mockResolvedValue(human(true) as any);
+    vi.mocked(getSession).mockResolvedValue({
+      session: { id: "session-1", factors: { user: { id: "someone-else" } } },
+    } as any);
+
+    expect(await continueIfVerifiedElsewhere(command)).toEqual({ pending: true });
+  });
+
+  test("continues the flow of this browser once the address is verified elsewhere", async () => {
+    vi.mocked(getUserByID).mockResolvedValue(human(true) as any);
+
+    const result = await continueIfVerifiedElsewhere(command);
+
+    expect(result).toHaveProperty("redirect");
+    expect((result as { redirect: string }).redirect).toMatch(/^\/authenticator\/set\?/);
+    expect((result as { redirect: string }).redirect).toContain("requestId=oidc_req");
+    expect(verifyEmail).not.toHaveBeenCalled();
   });
 });
 

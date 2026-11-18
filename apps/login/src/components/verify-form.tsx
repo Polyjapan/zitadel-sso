@@ -1,7 +1,7 @@
 "use client";
 
 import { Alert, AlertType } from "@/components/alert";
-import { resendVerification, sendVerification } from "@/lib/actions/verify";
+import { continueIfVerifiedElsewhere, resendVerification, sendVerification } from "@/lib/actions/verify";
 import { handleServerActionResponse } from "@/lib/client-utils";
 import { UNKNOWN_USER_ID } from "@/lib/constants";
 import { useTranslations } from "next-intl";
@@ -112,6 +112,43 @@ export function VerifyForm({ userId, loginName, organization, requestId, code, i
     },
     [isInvite, userId, loginName, organization, requestId, router, t],
   );
+
+  // PolyJapan: when the link of the mail is opened in another browser (the mail app's), continue
+  // here as soon as the address is verified, instead of leaving this tab waiting for a code.
+  const loadingRef = useRef(false);
+  loadingRef.current = loading;
+  useEffect(() => {
+    if (isInvite || userId === UNKNOWN_USER_ID) {
+      return;
+    }
+    let stopped = false;
+    let running = false;
+    const check = async () => {
+      if (stopped || running || loadingRef.current) {
+        return;
+      }
+      running = true;
+      try {
+        const response = await continueIfVerifiedElsewhere({ userId, loginName, organization, requestId });
+        // only act on a continuation; errors stay silent, the code can still be typed
+        if (!stopped && response && ("redirect" in response || "samlData" in response)) {
+          stopped = handleServerActionResponse(response, router, setSamlData, setError);
+        }
+      } catch {
+        // keep waiting, the code can still be typed
+      } finally {
+        running = false;
+      }
+    };
+    const interval = setInterval(check, 3000);
+    const onVisible = () => document.visibilityState === "visible" && check();
+    document.addEventListener("visibilitychange", onVisible);
+    return () => {
+      stopped = true;
+      clearInterval(interval);
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, [isInvite, userId, loginName, organization, requestId, router]);
 
   useEffect(() => {
     if (submit && code && code !== processedCode.current) {

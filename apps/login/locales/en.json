@@ -403,6 +403,7 @@
     "userIdMissing": "No userId provided!",
     "successTitle": "User verified",
     "successDescription": "The user has been verified successfully.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "Continue",
     "setupAuthenticator": "Setup authenticator",
     "verify": {

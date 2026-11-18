@@ -403,6 +403,7 @@
     "userIdMissing": "Geen gebruikers-ID opgegeven!",
     "successTitle": "Gebruiker geverifieerd",
     "successDescription": "De gebruiker is succesvol geverifieerd.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "Doorgaan",
     "setupAuthenticator": "Authenticator instellen",
     "verify": {

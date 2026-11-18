@@ -403,6 +403,7 @@
     "userIdMissing": "Nie podano identyfikatora użytkownika!",
     "successTitle": "Weryfikacja zakończona",
     "successDescription": "Użytkownik został pomyślnie zweryfikowany.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "Kontynuuj",
     "setupAuthenticator": "Skonfiguruj uwierzytelnianie",
     "verify": {

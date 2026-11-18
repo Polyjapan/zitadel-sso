@@ -403,6 +403,7 @@
     "userIdMissing": "userId не надано!",
     "successTitle": "Користувача підтверджено",
     "successDescription": "Користувача успішно підтверджено.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "Продовжити",
     "setupAuthenticator": "Налаштувати автентифікатор",
     "verify": {

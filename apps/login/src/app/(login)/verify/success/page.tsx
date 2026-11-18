@@ -61,6 +61,13 @@ export default async function Page(props: { searchParams: Promise<any> }) {
         <p className="ztdl-p mb-6 block">
           <Translated i18nKey="successDescription" namespace="verify" />
         </p>
+        {!sessionFactors && (
+          // PolyJapan: opened from the mail in a browser that did not start the login (the mail
+          // app's); the original tab continues by itself (see continueIfVerifiedElsewhere)
+          <p className="ztdl-p mb-6 block" data-testid="verified-elsewhere">
+            <Translated i18nKey="successElsewhere" namespace="verify" />
+          </p>
+        )}
 
         {sessionFactors ? (
           <UserAvatar

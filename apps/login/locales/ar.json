@@ -403,6 +403,7 @@
     "userIdMissing": "لم يتم تقديم userId!",
     "successTitle": "تم التحقق من المستخدم",
     "successDescription": "تم التحقق من المستخدم بنجاح.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "متابعة",
     "setupAuthenticator": "إعداد المصادق",
     "verify": {

@@ -403,6 +403,7 @@
     "userIdMissing": "userId sağlanmadı!",
     "successTitle": "Kullanıcı doğrulandı",
     "successDescription": "Kullanıcı başarıyla doğrulandı.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "Devam",
     "setupAuthenticator": "Kimlik doğrulayıcı kur",
     "verify": {

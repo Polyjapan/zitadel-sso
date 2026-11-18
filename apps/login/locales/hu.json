@@ -403,6 +403,7 @@
     "userIdMissing": "Nincs megadva felhasználói azonosító!",
     "successTitle": "Felhasználó ellenőrizve",
     "successDescription": "A felhasználó ellenőrzése sikeresen megtörtént.",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "Tovább",
     "setupAuthenticator": "Hitelesítő beállítása",
     "verify": {

@@ -396,6 +396,7 @@
     "userIdMissing": "ユーザーIDが指定されていません！",
     "successTitle": "ユーザー確認完了",
     "successDescription": "ユーザーの確認が正常に完了しました。",
+    "successElsewhere": "Your address is confirmed. If you started on another page or device, go back there: it continues on its own. You can close this page.",
     "successContinue": "続行",
     "setupAuthenticator": "認証の設定",
     "verify": {
