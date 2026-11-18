@@ -20,7 +20,7 @@
   "verifyemail": {
     "title": "Confirmez votre adresse e-mail",
     "preHeader": "Un clic pour confirmer votre adresse.",
-    "subject": "Confirmez votre adresse e-mail",
+    "subject": "{{.Code}} est votre code de confirmation",
     "greeting": "Bonjour {{.FirstName}},",
     "text": "Merci de confirmer que cette adresse e-mail est bien la vôtre.\n\nCliquez sur le bouton ci-dessous, ou saisissez le code sur la page de connexion.",
     "buttonText": "Confirmer mon adresse",
@@ -29,7 +29,7 @@
   "verifyemailotp": {
     "title": "Votre code de connexion",
     "preHeader": "Votre code de connexion, valable cinq minutes.",
-    "subject": "Votre code de connexion",
+    "subject": "{{.OTP}} est votre code de connexion",
     "greeting": "Bonjour {{.FirstName}},",
     "text": "Voici votre code de connexion. Il est valable cinq minutes.\n\nSaisissez-le sur la page de connexion, ou cliquez sur le bouton ci-dessous.",
     "buttonText": "Me connecter",

@@ -26,6 +26,8 @@ const BRANDS = {
 
 const sample: Record<string, string> = {
   FirstName: "Jean",
+  Code: "K7Q2PX",
+  OTP: "482913",
   DisplayName: "Jean Dupont",
   PreferredLoginName: "jean.dupont@example.com",
   Username: "jean.dupont@example.com",

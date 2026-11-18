@@ -20,7 +20,7 @@
   "verifyemail": {
     "title": "Confirm your e-mail address",
     "preHeader": "One click to confirm your address.",
-    "subject": "Confirm your e-mail address",
+    "subject": "{{.Code}} is your confirmation code",
     "greeting": "Hello {{.FirstName}},",
     "text": "Please confirm that this e-mail address is yours.\n\nClick the button below, or enter the code on the sign-in page.",
     "buttonText": "Confirm my address",
@@ -29,7 +29,7 @@
   "verifyemailotp": {
     "title": "Your sign-in code",
     "preHeader": "Your sign-in code, valid for five minutes.",
-    "subject": "Your sign-in code",
+    "subject": "{{.OTP}} is your sign-in code",
     "greeting": "Hello {{.FirstName}},",
     "text": "Here is your sign-in code. It is valid for five minutes.\n\nEnter it on the sign-in page, or click the button below.",
     "buttonText": "Sign in",
