@@ -720,6 +720,28 @@ describe("sendLoginname", () => {
       expect(result?.redirect).toContain("email=new%40example.com");
     });
 
+    test("should send an unknown e-mail of an IdP-only discovered organization to the IdP, not to register", async () => {
+      // public login settings (default org) allow registration...
+      mockGetLoginSettings.mockImplementation(async ({ organization }: { organization?: string }) =>
+        organization === "internalOrg"
+          ? { allowRegister: true, allowLocalAuthentication: false, allowDomainDiscovery: true, ignoreUnknownUsernames: true }
+          : { allowRegister: true, allowLocalAuthentication: true, ignoreUnknownUsernames: false },
+      );
+      // ...but the e-mail domain belongs to an organization that signs in through its IdP only
+      mockGetOrgsByDomain.mockResolvedValue({ result: [{ id: "internalOrg" }] });
+      mockGetActiveIdentityProviders.mockResolvedValue({
+        identityProviders: [{ id: "google", type: "GOOGLE", options: { isAutoCreation: true } }],
+      });
+      mockStartIdentityProviderFlow.mockResolvedValue({ url: "https://accounts.google.com/auth" });
+
+      const result = await sendLoginname({
+        loginName: "someone@japan-impact.ch",
+        defaultOrganization: "defaultOrg",
+      });
+
+      expect(result).toEqual({ redirect: "https://accounts.google.com/auth" });
+    });
+
     test("should not redirect an unknown username that is not an e-mail to register", async () => {
       mockGetLoginSettings.mockResolvedValue({
         allowRegister: true,
