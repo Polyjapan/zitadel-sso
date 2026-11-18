@@ -1,0 +1,74 @@
+{
+  "init": {
+    "title": "Activez votre compte",
+    "preHeader": "Votre compte a été créé, il ne reste qu'à l'activer.",
+    "subject": "Activez votre compte",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Un compte a été créé pour vous. Votre identifiant est {{.PreferredLoginName}}.\n\nCliquez sur le bouton ci-dessous pour l'activer et choisir comment vous connecter.",
+    "buttonText": "Activer mon compte",
+    "footerText": "Vous n'êtes pas à l'origine de cette demande ? Ignorez simplement ce message.\nMessage automatique, merci de ne pas y répondre."
+  },
+  "passwordreset": {
+    "title": "Réinitialisation du mot de passe",
+    "preHeader": "Choisissez un nouveau mot de passe.",
+    "subject": "Réinitialisez votre mot de passe",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Nous avons reçu une demande de réinitialisation du mot de passe de votre compte.\n\nCliquez sur le bouton ci-dessous pour en choisir un nouveau.",
+    "buttonText": "Choisir un nouveau mot de passe",
+    "footerText": "Vous n'êtes pas à l'origine de cette demande ? Ignorez ce message, votre mot de passe reste inchangé.\nMessage automatique, merci de ne pas y répondre."
+  },
+  "verifyemail": {
+    "title": "Confirmez votre adresse e-mail",
+    "preHeader": "Un clic pour confirmer votre adresse.",
+    "subject": "Confirmez votre adresse e-mail",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Merci de confirmer que cette adresse e-mail est bien la vôtre.\n\nCliquez sur le bouton ci-dessous, ou saisissez le code sur la page de connexion.",
+    "buttonText": "Confirmer mon adresse",
+    "footerText": "Vous n'êtes pas à l'origine de cette demande ? Ignorez simplement ce message.\nMessage automatique, merci de ne pas y répondre."
+  },
+  "verifyemailotp": {
+    "title": "Votre code de connexion",
+    "preHeader": "Votre code de connexion, valable cinq minutes.",
+    "subject": "Votre code de connexion",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Voici votre code de connexion. Il est valable cinq minutes.\n\nSaisissez-le sur la page de connexion, ou cliquez sur le bouton ci-dessous.",
+    "buttonText": "Me connecter",
+    "footerText": "Vous n'avez pas essayé de vous connecter ? Ignorez ce message et pensez à changer votre mot de passe.\nMessage automatique, merci de ne pas y répondre."
+  },
+  "domainclaimed": {
+    "title": "Changement d'identifiant",
+    "preHeader": "Votre identifiant doit changer.",
+    "subject": "Votre identifiant doit changer",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Le domaine {{.Domain}} appartient désormais à une autre organisation, et votre identifiant {{.Username}} n'en fait pas partie.\n\nNous vous avons attribué un identifiant temporaire : {{.TempUsername}}. Connectez-vous avec, puis changez votre adresse e-mail.",
+    "buttonText": "Me connecter",
+    "footerText": "Message automatique, merci de ne pas y répondre."
+  },
+  "passwordless_registration": {
+    "title": "Ajoutez une clé d'accès",
+    "preHeader": "Connectez-vous sans mot de passe.",
+    "subject": "Ajoutez une clé d'accès à votre compte",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Vous pouvez ajouter une clé d'accès (passkey) à votre compte pour vous connecter sans mot de passe, avec votre téléphone, votre empreinte ou une clé de sécurité.\n\nCliquez sur le bouton ci-dessous pour l'ajouter.",
+    "buttonText": "Ajouter une clé d'accès",
+    "footerText": "Vous n'êtes pas à l'origine de cette demande ? Ignorez simplement ce message.\nMessage automatique, merci de ne pas y répondre."
+  },
+  "password_change": {
+    "title": "Mot de passe modifié",
+    "preHeader": "Le mot de passe de votre compte a été modifié.",
+    "subject": "Votre mot de passe a été modifié",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Le mot de passe de votre compte vient d'être modifié.\n\nSi c'est bien vous, il n'y a rien à faire. Sinon, réinitialisez votre mot de passe immédiatement depuis la page de connexion.",
+    "buttonText": "Aller à la connexion",
+    "footerText": "Message automatique, merci de ne pas y répondre."
+  },
+  "invite_user": {
+    "title": "Vous êtes invité·e",
+    "preHeader": "Acceptez l'invitation pour créer votre accès.",
+    "subject": "Invitation à rejoindre {{.ApplicationName}}",
+    "greeting": "Bonjour {{.FirstName}},",
+    "text": "Vous avez été invité·e à rejoindre {{.ApplicationName}}.\n\nCliquez sur le bouton ci-dessous pour accepter l'invitation et choisir comment vous connecter.",
+    "buttonText": "Accepter l'invitation",
+    "footerText": "Vous ne vous attendiez pas à cette invitation ? Ignorez simplement ce message.\nMessage automatique, merci de ne pas y répondre."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@polyjapan/zitadel-mailer",
+  "private": true,
+  "type": "module",
+  "description": "Renders and sends ZITADEL notification e-mails received from the HTTP e-mail provider",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/server.ts",
+    "test": "node --test 'test/**/*.test.ts'",
+    "preview": "node scripts/preview.ts",
+    "sync-texts": "node scripts/sync-texts.ts"
+  },
+  "dependencies": {
+    "nodemailer": "10.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0"
+  }
+}

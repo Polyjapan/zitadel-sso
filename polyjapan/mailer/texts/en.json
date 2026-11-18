@@ -1,0 +1,74 @@
+{
+  "init": {
+    "title": "Activate your account",
+    "preHeader": "Your account is ready, it only needs activating.",
+    "subject": "Activate your account",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "An account has been created for you. Your username is {{.PreferredLoginName}}.\n\nClick the button below to activate it and choose how you sign in.",
+    "buttonText": "Activate my account",
+    "footerText": "Didn't ask for this? Just ignore this message.\nAutomated message, please do not reply."
+  },
+  "passwordreset": {
+    "title": "Password reset",
+    "preHeader": "Choose a new password.",
+    "subject": "Reset your password",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "We received a request to reset the password of your account.\n\nClick the button below to choose a new one.",
+    "buttonText": "Choose a new password",
+    "footerText": "Didn't ask for this? Ignore this message, your password stays the same.\nAutomated message, please do not reply."
+  },
+  "verifyemail": {
+    "title": "Confirm your e-mail address",
+    "preHeader": "One click to confirm your address.",
+    "subject": "Confirm your e-mail address",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "Please confirm that this e-mail address is yours.\n\nClick the button below, or enter the code on the sign-in page.",
+    "buttonText": "Confirm my address",
+    "footerText": "Didn't ask for this? Just ignore this message.\nAutomated message, please do not reply."
+  },
+  "verifyemailotp": {
+    "title": "Your sign-in code",
+    "preHeader": "Your sign-in code, valid for five minutes.",
+    "subject": "Your sign-in code",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "Here is your sign-in code. It is valid for five minutes.\n\nEnter it on the sign-in page, or click the button below.",
+    "buttonText": "Sign in",
+    "footerText": "Didn't try to sign in? Ignore this message and consider changing your password.\nAutomated message, please do not reply."
+  },
+  "domainclaimed": {
+    "title": "Your username is changing",
+    "preHeader": "Your username has to change.",
+    "subject": "Your username has to change",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "The domain {{.Domain}} now belongs to another organisation, and your username {{.Username}} is not part of it.\n\nWe gave you a temporary username: {{.TempUsername}}. Sign in with it, then change your e-mail address.",
+    "buttonText": "Sign in",
+    "footerText": "Automated message, please do not reply."
+  },
+  "passwordless_registration": {
+    "title": "Add a passkey",
+    "preHeader": "Sign in without a password.",
+    "subject": "Add a passkey to your account",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "You can add a passkey to your account to sign in without a password, with your phone, your fingerprint or a security key.\n\nClick the button below to add it.",
+    "buttonText": "Add a passkey",
+    "footerText": "Didn't ask for this? Just ignore this message.\nAutomated message, please do not reply."
+  },
+  "password_change": {
+    "title": "Password changed",
+    "preHeader": "The password of your account was changed.",
+    "subject": "Your password was changed",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "The password of your account has just been changed.\n\nIf this was you, there is nothing to do. If not, reset your password right away from the sign-in page.",
+    "buttonText": "Go to sign-in",
+    "footerText": "Automated message, please do not reply."
+  },
+  "invite_user": {
+    "title": "You're invited",
+    "preHeader": "Accept the invitation to set up your access.",
+    "subject": "Invitation to join {{.ApplicationName}}",
+    "greeting": "Hello {{.FirstName}},",
+    "text": "You have been invited to join {{.ApplicationName}}.\n\nClick the button below to accept the invitation and choose how you sign in.",
+    "buttonText": "Accept the invitation",
+    "footerText": "Weren't expecting this? Just ignore this message.\nAutomated message, please do not reply."
+  }
+}
